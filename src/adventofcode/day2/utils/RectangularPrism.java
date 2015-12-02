@@ -6,12 +6,22 @@ public class RectangularPrism {
 	
 	private int l, w, h;
 	private int[] products;
+	private int[] lengths;
 	
 	public RectangularPrism(int l, int w, int h) {
 		this.l = l;
 		this.w = w;
 		this.h = h;
 		this.products = new int[3];
+		this.lengths = new int[3];
+		
+		//add all the lengths to the array so we can sort it
+		lengths[0] = l;
+		lengths[1] = w;
+		lengths[2] = h;
+		
+		//sort it to have the two smallest sides in front of the array, we use these later to calculate the smallest perimeter
+		Arrays.sort(lengths);
 		
 		//we calculate all the sides
 		products[0] = w * h;
@@ -34,6 +44,16 @@ public class RectangularPrism {
 	public int smallestSide() {
 		
 		return products[0];
+	}
+	
+	public int volume() {
+		
+		return l * w * h;
+	}
+	
+	public int smallestPerimeter() {
+		
+		return lengths[0] * 2 + lengths[1] * 2;
 	}
 
 	public int getL() {
