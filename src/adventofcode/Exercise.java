@@ -7,7 +7,9 @@ package adventofcode;
  */
 public abstract class Exercise extends Thread implements Exercisable {
 	
+	private String title = "Unnamed exercise";
 	private boolean running = false;
+	private String input = "";
 	
 	public void execute() {
 		this.running = true;
@@ -49,15 +51,20 @@ public abstract class Exercise extends Thread implements Exercisable {
 	}
 	
 	/**
-	 * Calculates this exercises' assignment.
+	 * Calculates this exercises' assignment. And output the answer to the console.
 	 */
 	public abstract void calculations();
 	
 	/**
-	 * Outputs the calculations will give. The exercise is killed after an ouput has been generated.
+	 * Outputs the out object to the console. The exercise is killed after an output has been written.
 	 * @param out The object that should be written out to the console.
 	 */
-	public abstract void output(Object out);
+	public void output(Object out) {
+		//we write our output to the console
+		this.write(this.getTitle() + " " + out.toString());
+		//and we kill the exercise
+		this.kill();
+	}
 	
 	/**
 	 * Indicator wheter or not the exercise is running.
@@ -74,6 +81,22 @@ public abstract class Exercise extends Thread implements Exercisable {
 	 */
 	public void setRunning(boolean running) {
 		this.running = running;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getInput() {
+		return input;
+	}
+
+	public void setInput(String input) {
+		this.input = input;
 	}
 
 }
